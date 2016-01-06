@@ -4,44 +4,43 @@ with open('input.txt') as file:
         l = line.rstrip().split(' ')
         matrix.append(l)
 
-def swapMatrix(m):
-    swappedMatrix = []
-    for i in range(0,len(m[0])):
-        swappedMatrix.append([])
-        for row in range(0,len(m)):
-            swappedMatrix[i].append(m[row][i])
-    return swappedMatrix
-
-def flipMatrix(m):
-    flippedMatrix = list(m)
-    for row in flippedMatrix:
-        row.reverse()
-    return flippedMatrix
-        
-
-def findAdjacentProduct(n,m):
-    total = 0
-    for row in m:
-        index = 0
-        while(n+index<=len(row)):
-            curTotal = 1
-            for i in range(index,n+index):
-                curTotal*=int(row[i])
-            if curTotal>total:
-                total=curTotal
-            index+=1
+def checkRightDiag(row,col,n,m):
+    total = 1
+    for i in range(0,n):
+        total*=int(m[row+i][col+i])
     return total
 
-def findDiagonalProduct(n,m):
-    index = len(m)-1
-    
+def checkLeftDiag(row,col,n,m):
+    total = 1
+    for i in range(0,n):
+        total*=int(m[row+i][col-i])
+    return total
 
-def printMatrix(m):
-    for row in m:
-        print(row)
+def checkRight(row,col,n,m):
+    total = 1
+    for i in range(0,n):
+        total*=int(m[row][col+i])
+    return total
 
-printMatrix(matrix)
-print()
-printMatrix(flipMatrix(matrix))
+def checkDown(row,col,n,m):
+    total = 1
+    for i in range(0,n):
+        total*=int(m[row+i][col])
+    return total
 
+def findMaxProduct(n,m):
+    total = horz = vert = leftDiag = rightDiag = 0
+    for i in range(0,len(m)):
+        for j in range(0,len(m[i])):
+            if(i<len(m)-(n-1)):
+                horz = checkDown(i,j,n,m)
+                if(j<len(m[i])-(n-1)):
+                    rightDiag = checkRightDiag(i,j,n,m)
+                if(j>=(n-1)):
+                    leftDiag = checkLeftDiag(i,j,n,m)
+            if(j<len(m[i])-(n-1)):
+                vert = checkRight(i,j,n,m)
+            total = max(total,horz,vert,leftDiag,rightDiag)
+    return total
 
+print(findMaxProduct(4,matrix))
