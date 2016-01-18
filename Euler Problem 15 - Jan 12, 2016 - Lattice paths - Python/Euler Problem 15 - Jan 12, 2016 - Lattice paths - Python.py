@@ -1,25 +1,4 @@
 import time
-def numPaths(x,y,n):
-    paths = 0
-    if(x == n or y == n):
-        return 1
-    else:
-        if(y<n):
-            paths+=numPaths(x,y+1,n)
-        if(x<n):
-            paths+=numPaths(x+1,y,n)
-    return paths
-
-'''print(numPaths(0,0,1))
-print(numPaths(0,0,2))
-print(numPaths(0,0,3))
-print(numPaths(0,0,4))
-print(numPaths(0,0,5))
-print(numPaths(0,0,6))
-print(numPaths(0,0,7))
-print(numPaths(0,0,8))
-print(numPaths(0,0,9))
-print(numPaths(0,0,10))'''
 
 def getGrid(n):
     grid = []
