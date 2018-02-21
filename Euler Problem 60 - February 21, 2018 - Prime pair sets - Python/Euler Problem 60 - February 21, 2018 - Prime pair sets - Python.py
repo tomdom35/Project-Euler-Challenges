@@ -34,22 +34,6 @@ def get_first_num_list(tupes):
         nums.append(t[0])
     return sorted(list(set(nums)))
 
-
-def find_set_of_n(n,tupes):
-    nums = [None] * n
-    for t in tupes: 
-        x = t[0]
-        y = t[1]
-        y_nums = get_nums_in_tupe(y,tupes)
-        x_nums = get_nums_in_tupe(x,tupes)
-        xy_nums = sorted(list(set(y_nums).intersection(x_nums)))
-        print(x)
-        print(x_nums)
-        print(y)
-        print(y_nums)
-        print(xy_nums)
-
-
 def get_common_elements(master_list):
     c_list = master_list[0]
     for lst in master_list:
